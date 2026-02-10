@@ -3,33 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
 import emailjs from "@emailjs/browser";
 
-// Placeholder EmailJS config – replace with your real values
 const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
-// Phrases for the "No" button
 const NO_PHRASES = [
   "Nie",
-  "Are you sure?",
-  "Really sure?",
-  "Think again!",
-  "Last chance!",
-  "Surely not?",
-  "You might regret this!",
-  "Give it another thought!",
-  "Are you absolutely certain?",
-  "This could be a mistake!",
-  "Have a heart!",
-  "Don't be so cold!",
-  "Change of heart?",
-  "Wouldn't you reconsider?",
-  "Is that your final answer?",
-  "You're breaking my heart ;(",
+  "Ejj",
+  "EJJJJJ!!!!",
+  "Ejjjj no co ty!!!!???",
+  "SERIO????",
+  "Nie rób tak Miśkowi :(((",
+  "Bo będe smutny!!!",
+  "Wrrrrrrrrr",
+  "Naprawdę chcesz żebym był smutny??",
+  "Mam nadziejkę że przypadkiem to klikasz",
+  "Ranisz moje serduszko",
+  "Nie bądź taka pls",
+  "Nie kochasz mnie?? :(",
+  "Zastanów się jeszcze raz",
+  "To twoja ostateczna odpowiedź?",
+  "No to jestem smutas",
   "Plsss?"
 ];
 
-// Simple hook to keep track of window size for Confetti
 function useWindowSize() {
   const [size, setSize] = useState({
     width: typeof window !== "undefined" ? window.innerWidth : 0,
@@ -58,15 +55,11 @@ function App() {
 
   const { width, height } = useWindowSize();
 
-  // Compute how big the "Yes" button should be based on noCount
-  // Clamped so it doesn't completely break layout, but can get very large
-  const yesScale = Math.min(1 + noCount * 0.25, 5); // up to 5x size
-  const yesFontSizeRem = Math.min(1.25 + noCount * 0.18, 3.5); // font size grows too
-
+  const yesScale = Math.min(1 + noCount * 0.25, 5); 
+  const yesFontSizeRem = Math.min(1.25 + noCount * 0.18, 3.5); 
   const currentNoLabel =
     NO_PHRASES[Math.min(noCount, NO_PHRASES.length - 1)];
 
-  // Sends an email via EmailJS when she says yes
   const sendEmail = async () => {
     try {
       setIsSending(true);
@@ -75,14 +68,12 @@ function App() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          message: "She said YES!",
+          message: "OMGGGGG zgodziła się!!!!!!",
           noCount,
-          // You can add more template params here if needed (e.g. name, timestamp)
         },
         EMAILJS_PUBLIC_KEY
       );
     } catch (error) {
-      // In a real app you might show a toast; for now we just log
       console.error("EmailJS error:", error);
     } finally {
       setIsSending(false);
@@ -94,7 +85,6 @@ function App() {
   };
 
   const handleYesClick = () => {
-    // Trigger email in the background and immediately show the success screen
     sendEmail();
     setHasSaidYes(true);
   };
@@ -103,7 +93,6 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-red-50 flex items-center justify-center px-4">
       <AnimatePresence mode="wait">
         {!hasSaidYes ? (
-          // Main question view
           <motion.div
             key="question-screen"
             initial={{ opacity: 0, y: 30 }}
@@ -112,7 +101,6 @@ function App() {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="max-w-lg w-full text-center flex flex-col items-center gap-6"
           >
-            {/* Cute asking GIF */}
             <motion.img
               src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
               alt="Cute bear asking"
@@ -122,7 +110,6 @@ function App() {
               transition={{ type: "spring", stiffness: 140, damping: 12 }}
             />
 
-            {/* Question text */}
             <div className="space-y-2">
               <h1 className="font-fredoka text-3xl sm:text-4xl md:text-5xl text-rose-600 drop-shadow-sm">
                 Serdeczna hejka mam małe pytanko... Zostaniesz moją Walentynką?
@@ -132,9 +119,7 @@ function App() {
               </p>
             </div>
 
-            {/* Buttons */}
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-              {/* YES Button - grows as "No" is clicked */}
               <motion.button
                 type="button"
                 onClick={handleYesClick}
@@ -151,7 +136,6 @@ function App() {
                 TAK
               </motion.button>
 
-              {/* NO Button - changes text each time */}
               <motion.button
                 type="button"
                 onClick={handleNoClick}
@@ -163,15 +147,13 @@ function App() {
               </motion.button>
             </div>
 
-            {/* Subtle hint under buttons */}
             {noCount > 0 && (
               <p className="font-nunito text-xs sm:text-sm text-rose-400 mt-1">
-                The more you say no, the bigger the yes gets.
+                Przykro mi coraz bardziej!!
               </p>
             )}
           </motion.div>
         ) : (
-          // Success view (she said Yes)
           <motion.div
             key="success-screen"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -180,7 +162,6 @@ function App() {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="relative max-w-xl w-full text-center flex flex-col items-center gap-6 py-8"
           >
-            {/* Confetti overlay */}
             <div className="fixed inset-0 pointer-events-none">
               <Confetti
                 width={width}
@@ -190,7 +171,6 @@ function App() {
               />
             </div>
 
-            {/* Happy GIF */}
             <motion.img
               src="https://media.giphy.com/media/3oriO0MfzG1P3cKYko/giphy.gif"
               alt="Happy bear couple"
@@ -200,18 +180,17 @@ function App() {
               transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
             />
 
-            {/* Sweet message */}
             <div className="space-y-2 px-4">
               <h2 className="font-fredoka text-3xl sm:text-4xl text-rose-600">
-                Okay, yay!
+                OMGGGGGG!!!!!
               </h2>
               <p className="font-nunito text-rose-500 text-sm sm:text-base">
-                You just made my day. I promise to make this Valentine&apos;s
-                Day (and every day after) extra special.
+                Jestem bardzo szczęśliwy że zgodziłaś się!!! Ja Cię bardzo kocham!!!
+                 Dziękuję serdecznie że jesteś moją Walentynką!!! To najlepszy dzień w moim życiu!!!
               </p>
               {isSending && (
                 <p className="font-nunito text-xs text-rose-400 mt-1">
-                  Sending a little notification to me right now…
+                  Powiadomianie Michasia że się zgodziłaś!!!
                 </p>
               )}
             </div>
