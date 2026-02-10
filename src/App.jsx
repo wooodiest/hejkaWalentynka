@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
 import emailjs from "@emailjs/browser";
 
+import lunka from './assets/lunka.jpg';
+import misiek from './assets/misiek.mp4';
+
 const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
@@ -102,9 +105,10 @@ function App() {
             className="max-w-lg w-full text-center flex flex-col items-center gap-6"
           >
             <motion.img
-              src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-              alt="Cute bear asking"
-              className="w-52 h-52 object-cover rounded-3xl shadow-xl border-4 border-pink-200"
+              src={lunka}
+              alt="Lunka"
+              whileHover={{ scale: 1.05 }}
+              className="w-72 h-72 object-cover rounded-3xl shadow-xl border-4 border-pink-200"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 140, damping: 12 }}
@@ -171,14 +175,18 @@ function App() {
               />
             </div>
 
-            <motion.img
-              src="https://media.giphy.com/media/3oriO0MfzG1P3cKYko/giphy.gif"
-              alt="Happy bear couple"
-              className="w-64 h-64 object-cover rounded-3xl shadow-2xl border-4 border-pink-200"
+            <motion.video
+              src={misiek}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-64 h-auto object-contain rounded-3xl shadow-2xl border-4 border-pink-200"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
             />
+
 
             <div className="space-y-2 px-4">
               <h2 className="font-fredoka text-3xl sm:text-4xl text-rose-600">

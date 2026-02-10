@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ['"Nunito"', "system-ui", "sans-serif"],
-        fredoka: ['"Fredoka"', "system-ui", "sans-serif"],
+        fredoka: ['Fredoka', 'sans-serif'],
+        nunito: ['Nunito', 'sans-serif'],
       },
       colors: {
         // Pastel rose shades for the background
