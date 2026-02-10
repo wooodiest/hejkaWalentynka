@@ -6,9 +6,11 @@ import emailjs from "@emailjs/browser";
 import lunka from './assets/lunka.jpg';
 import misiek from './assets/misiek.mp4';
 
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_tz9ad2f";
+const EMAILJS_TEMPLATE_ID = "template_n5fc2zi";
+const EMAILJS_PUBLIC_KEY = "_9czaF8cYpg31HvEU";
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const NO_PHRASES = [
   "Nie",
@@ -69,7 +71,6 @@ function App() {
 
   const { width, height } = useWindowSize();
 
-  const yesScale = Math.min(1 + noCount * 0.25, 5); 
   const yesFontSizeRem = Math.min(1.25 + noCount * 0.18, 3.5); 
   const currentNoLabel = NO_PHRASES[Math.min(noCount, NO_PHRASES.length - 1)];
 
@@ -132,34 +133,37 @@ function App() {
               </p>
             </div>
 
-            <div className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 w-full">
+            <div className="mt-1 flex flex-col items-center gap-4 w-full">
+              
               <motion.button
                 type="button"
                 onClick={handleYesClick}
-                className="relative z-50 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white font-bold shadow-[0_0_25px_rgba(236,72,153,0.5)] border-2 border-transparent hover:border-pink-200"
-                animate={{ scale: yesScale }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="relative z-50 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white font-bold shadow-[0_0_25px_rgba(236,72,153,0.5)] border-4 border-transparent hover:border-pink-200 transition-all duration-300"
+                
                 whileHover={{ 
-                  scale: yesScale * 1.05,
-                  boxShadow: "0 0 40px rgba(236,72,153,0.7)"
+                  boxShadow: "0 0 40px rgba(236,72,153,0.7)",
+                  scale: 1.05 
                 }}
-                whileTap={{ scale: yesScale * 0.95 }}
+                whileTap={{ scale: 0.95 }}
                 style={{
                   fontSize: `${yesFontSizeRem}rem`,
-                  padding: `${yesFontSizeRem * 0.8}rem ${yesFontSizeRem * 1.5}rem`,
-                  maxWidth: "100vw"
+                  padding: `${yesFontSizeRem * 0.5}rem ${yesFontSizeRem * 1.5}rem`,
+                  minWidth: `${Math.min(200 + noCount * 50, window.innerWidth - 40)}px` 
                 }}
               >
-                <span>TAK</span>
+                <span className="whitespace-nowrap">TAK</span>
                 <HeartIcon className="w-[1em] h-[1em] animate-pulse" />
               </motion.button>
 
               <motion.button
                 type="button"
                 onClick={handleNoClick}
-                className="rounded-full bg-white/80 backdrop-blur-sm border-2 border-rose-200 text-rose-500 font-bold px-6 py-3 shadow-sm hover:bg-rose-50 hover:border-rose-300 hover:text-rose-600 transition-all focus:outline-none focus:ring-4 focus:ring-rose-100 text-base sm:text-lg min-w-[120px]"
+                className="order-last rounded-full bg-white/80 backdrop-blur-sm border-2 border-rose-200 text-rose-500 font-bold px-6 py-3 shadow-sm hover:bg-rose-50 hover:border-rose-300 hover:text-rose-600 transition-all focus:outline-none focus:ring-4 focus:ring-rose-100 text-base sm:text-lg min-w-[120px]"
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 whileTap={{ scale: 0.95 }}
+                style={{
+                   display: noCount > 15 ? 'none' : 'block'
+                }}
               >
                 {currentNoLabel}
               </motion.button>
@@ -189,7 +193,7 @@ function App() {
                 width={width}
                 height={height}
                 numberOfPieces={500}
-                recycle={false}
+                recycle={true}
                 gravity={0.15}
               />
             </div>
@@ -216,9 +220,9 @@ function App() {
                 OMGGGGGG!!!!!
               </h2>
               <p className="font-nunito text-rose-600 text-base sm:text-xl font-medium leading-relaxed">
-                Jestem bardzo szczęśliwy że zgodziłaś się!!! Ja Cię bardzo kocham!!!
+                Jestem bardzo szczęśliwy że się zgodziłaś!!!
                 <br />
-                Dziękuję serdecznie że jesteś moją Walentynką!!! To najlepszy dzień w moim życiu!!!
+                Dziękuję serdecznie że jesteś moją Walentynką!!! Ja Cię bardzo kocham!!! To najlepszy dzień w moim życiu!!!
               </p>
               {isSending && (
                 <div className="flex items-center justify-center gap-2 text-rose-400 text-sm font-semibold mt-2">
