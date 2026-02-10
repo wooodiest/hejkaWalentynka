@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Fredoka:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts import */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply font-nunito bg-rose-50;
+}
